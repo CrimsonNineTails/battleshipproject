@@ -2,7 +2,12 @@
 var rows = 10;
 var cols = 10;
 var squareSize = 50;
-
+var lettersForRows = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
+var fireLocation;
+var convertLetterToNumber;
+var collumNumber;
+var hits = 0;
+var hitsDisplay = 17;
 // gets the container element
 var gameBoardContainer = document.getElementById("gameboard");
 
@@ -18,7 +23,17 @@ var letterConversion = {
 	"G": 6,
 	"H": 7,
 	"I": 8,
-	"J": 9
+	"J": 9,
+	"a": 0,
+	"b": 1,
+	"c": 2,
+	"d": 3,
+	"e": 4,
+	"f": 5,
+	"g": 6,
+	"h": 7,
+	"i": 8,
+	"j": 9
 }
 
 // makes the grid columns and rows
@@ -34,7 +49,7 @@ for (i = 0; i < cols; i++) {
 		square.className = "boardSquare";
 
 		// THIS IS WHERE YOU WILL ADD CODE FOR PART 1 TO ADD TEXT TO EACH SQUARE
-
+		square.textContent = lettersForRows[j] + (i+1);
 		// set each grid square's coordinates: multiples of the current row or column number
 		var topPosition = j * squareSize;
 		var leftPosition = i * squareSize;
@@ -44,6 +59,8 @@ for (i = 0; i < cols; i++) {
 		square.style.left = leftPosition + 'px';
 	}
 }
+
+
 
 // Hardcoded 2D array to indicate where the ships are placed
 var gameBoard = [
@@ -61,6 +78,36 @@ var gameBoard = [
 
 function fireTorpedo() {
 
-	// Your game logic will go here!
+		fireLocation = document.getElementById("fireTorpedo").value;
+		console.log(fireLocation);
+		document.getElementById("fireTorpedo").value = null;
+		convertLetterToNumber = fireLocation.substring(0,1);
+		convertLetterToNumber = letterConversion[convertLetterToNumber];
+		console.log(convertLetterToNumber);
+		collumNumber = fireLocation.substring(1,3) - 1;
+		if(gameBoard[convertLetterToNumber][collumNumber] == 0){
+			document.getElementById("s" + convertLetterToNumber + collumNumber).style.backgroundColor = "gray";
+		  document.getElementById("winner").textContent = "Missed";
+	  }
+	  else {
+			document.getElementById("s" + convertLetterToNumber + collumNumber).style.backgroundColor = "red";
+			hits++
+			hitsDisplay--;
+			document.getElementById("winner").textContent = hitsDisplay + " hit left";
+		}
 
+		CheckGameOver();
+}
+function CheckGameOver() {
+	if (hits >= 17) {
+		document.getElementById("gameboard").innerHTML = null;
+		document.getElementById("winner").textContent = "You Win!";
+		document.getElementById("winner").innerHTML += "<br><button onclick=" + "ReloadPage()" + ">Play Again?</button>"
+	}
+	else {
+
+	}
+}
+function ReloadPage(){
+	location.reload();
 }
