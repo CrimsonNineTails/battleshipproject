@@ -85,11 +85,12 @@ function fireTorpedo() {
 		convertLetterToNumber = letterConversion[convertLetterToNumber];
 		console.log(convertLetterToNumber);
 		collumNumber = fireLocation.substring(1,3) - 1;
+
 		if(gameBoard[convertLetterToNumber][collumNumber] == 0){
 			document.getElementById("s" + convertLetterToNumber + collumNumber).style.backgroundColor = "gray";
 		  document.getElementById("winner").textContent = "Missed";
 	  }
-	  else {
+	  else if(gameBoard [convertLetterToNumber][collumNumber] == 1 && document.getElementById("s" + convertLetterToNumber + collumNumber).style.backgroundColor != "red" ) {
 			document.getElementById("s" + convertLetterToNumber + collumNumber).style.backgroundColor = "red";
 			hits++
 			hitsDisplay--;
