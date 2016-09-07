@@ -8,6 +8,8 @@ var convertLetterToNumber;
 var collumNumber;
 var hits = 0;
 var hitsDisplay = 17;
+var fire = new Audio('Voice 001.m4a')
+var random;
 // gets the container element
 var gameBoardContainer = document.getElementById("gameboard");
 
@@ -96,8 +98,10 @@ function fireTorpedo() {
 			hitsDisplay--;
 			document.getElementById("winner").textContent = hitsDisplay + " hit left";
 		}
-
+		random = Math.floor(Math.random() * 2);
+		console.log(random);
 		CheckGameOver();
+		fire.play();
 }
 function CheckGameOver() {
 	if (hits >= 17) {
@@ -105,7 +109,7 @@ function CheckGameOver() {
 		document.getElementById("winner").textContent = "You Win!";
 		document.getElementById("winner").innerHTML += "<br><button onclick=" + "ReloadPage()" + ">Play Again?</button>"
 	}
-	else {
+	else{
 
 	}
 }
