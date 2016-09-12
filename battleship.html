@@ -10,12 +10,14 @@
 	<div id="instructionsArea">
 		<h1>Battleship</h1>
 		<p id="instructions">Use the text box to enter your coordinate guess. Try to sink every battleship!</p>
-		<input type="text" id="fireTorpedo"><button onclick="fireTorpedo()">Fire Torpedo</button
+		<input type="text" id="fireTorpedo"><button onclick="fireTorpedo()">Fire Torpedo</button>
+		<button onclick="autoMaticBoat()">Randomize Boats</button>
 	</div>
 	<div><center><p id="winner">17 hit left</p><center></div>
 	<div id="gameboard">
 	</div>
-
+	<center><p id="placementNotification">place 5 unit long ship first then 4,3, and last 2</p>
+		<input type="text" id="placeBoats"><button onclick="placeBoat()">Place Boat</button></center>
 	<script type="text/javascript" src="battleship.js"></script>
 	</body>
 </html>
