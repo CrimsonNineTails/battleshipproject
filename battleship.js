@@ -259,12 +259,19 @@ function randomNumber(n)
 {
 	return Math.floor(Math.random() * n)
 }
+
 function autoMaticBoat(){
+	for (var r = 0; r < 10; r++) {
+		for (var c = 0; c < 10; c++) {
+				document.getElementById("s" + r + c).style.backgroundColor = "white";
+		}
+	}
+	refresh();
 	for(var ship = 0; ship < 5; ship++) {
 		var size = shipSize[ship];// size of the ship
 		var shipPoints = new Array(size);// grid points of ship
-		var run = true;
-		while(run){
+		var run = 0;
+		while(run < 100){
 				var x = randomNumber(10);// first coordinate of ship
 				var y = randomNumber(10);// second coordinate of ship
 				var d = randomNumber(4);// orientation of ship
@@ -275,7 +282,9 @@ function autoMaticBoat(){
 				}
 				if (checkPoints(shipPoints) == 1) {// check if points are already used
 					setPoints(shipPoints);// set point to one on the grid
-					run = false;// done with this ship, move on to the next
+					run = 100;// done with this ship, move on to the next
+				} else {
+					run++;
 				}
 		}
 	}
@@ -314,4 +323,25 @@ function setPoints(points){
 		var y = points[i][1];
 		gameBoard[x][y] = 1;
 	}
+}
+function refresh(){
+	for (var r = 0; r < 10; r++) {
+		for (var c = 0; c < 10; c++) {
+			gameBoard[r][c] = 0;
+		}
+	}
+	hits = 0;
+}
+
+function reveal(){
+		for (var r = 0; r < 10; r++) {
+			for (var c = 0; c < 10; c++) {
+				if(gameBoard[r][c] == 1){
+					document.getElementById("s" + r + c).style.backgroundColor = "red";
+				}
+				else{
+					document.getElementById("s" + r + c).style.backgroundColor = "gray";
+				}
+			}
+		}
 }
